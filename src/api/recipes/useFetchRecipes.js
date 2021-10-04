@@ -1,4 +1,5 @@
 import axios from "axios";
+import {API_URL, API_KEY, MAX_RESULT} from "@env";
 
 export const useFetchRecipes = () => {
 
