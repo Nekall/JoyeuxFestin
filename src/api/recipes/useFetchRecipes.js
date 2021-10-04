@@ -1,15 +1,21 @@
 import axios from "axios";
 import {API_URL, API_KEY, MAX_RESULT} from "@env";
+import { useDispatch } from "react-redux";
+import { addRecipes } from "../../redux/actions";
 
 export const useFetchRecipes = () => {
 
-  const getAllRecipes = () => {
+const dispatch = useDispatch();
+
+  const getAllRecipes = async () => {
     try {
-      const reponse = await axios.get(URL_API, {
-        apiKey: API_KEY,
-        number: MAX_RESULT
+      const response = await axios.get(API_URL, {
+        params: {
+          apiKey: API_KEY,
+          number: MAX_RESULT
+        }
       })
-      console.log("reponse", reponse.data.results);
+      dispatch(addRecipes(response.data.results))
     } catch(e) {
       console.log("Error in getAllRecipes", e);
     }
