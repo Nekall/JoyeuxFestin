@@ -5,13 +5,10 @@ import { useSelector } from "react-redux";
 import { getRecipesList } from "../../redux/selectors";
 import RecipeTile from "./RecipeTile.js"
 
-export default function RecipesList(){
+export default function RecipesList({navigation}){
   const {getAllRecipes} = useFetchRecipes();
   const allRecipes = useSelector(getRecipesList);
-
-  const renderItem = ({ item }) => <RecipeTile item={item} />
-
-  console.log(allRecipes);
+  const renderItem = ({ item }) => <RecipeTile item={item} navigation={navigation}/>
 
   useEffect(() => {
     getAllRecipes()

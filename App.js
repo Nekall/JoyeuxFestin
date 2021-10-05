@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import RecipesList from "./src/screens/RecipesList";
+import RecipesDetails from "./src/screens/RecipesDetails";
 import {Provider} from "react-redux";
 import {store} from "./src/redux/store.js";
 import { NavigationContainer } from "@react-navigation/native";
@@ -14,8 +15,9 @@ export default function App() {
     <Provider store={store}>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="RecipesList">
           <Stack.Screen name="RecipesList" component={RecipesList} />
+          <Stack.Screen name="RecipesDetails" component={RecipesDetails} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
