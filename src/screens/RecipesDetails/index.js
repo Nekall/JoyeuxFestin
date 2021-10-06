@@ -2,17 +2,22 @@ import React, { useEffect, useState }  from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView} from "react-native";
 import { useSelector } from "react-redux";
 import { useFetchRecipeDetails } from "../../api/recipes/useFetchRecipeDetails";
-import { getSelectedRecipe } from "../../redux/selectors";
+import { getSelectedRecipe, getStepsRecipe } from "../../redux/selectors";
+import uuid from "react-native-uuid";
 
 export default function RecipesDetails({route, navigation}){
   const { id } = route.params;
-  const {getRecipeById} = useFetchRecipeDetails();
+  const {getRecipeById, getStepById} = useFetchRecipeDetails();
 
   let recipe = useSelector(getSelectedRecipe);
+  let steps = useSelector(getStepsRecipe);
 
   useEffect(() => {
     getRecipeById(id);
+    getStepById(id);
   }, [])
+
+  console.log(steps);
 
   return(
     <>
@@ -23,8 +28,8 @@ export default function RecipesDetails({route, navigation}){
           <Text style={styles.readyInMinutes}>Ready in {recipe.readyInMinutes} minutes</Text>
           <View style={styles.ingredients}>
             <Text style={styles.ingTitle}>Ingredients:</Text>
-            {recipe.extendedIngredients.map(ingredient =>(
-              <Text style={styles.ingredient}>{ingredient.name}</Text>
+            {recipe.extendedIngredients?.map(ingredient =>(
+              <Text style={styles.ingredient} key={recipe.id}>{ingredient.name}</Text>
             ))}
           </View>
         </ScrollView>

@@ -21,7 +21,22 @@ export const useFetchRecipeDetails = () => {
     }
   }
 
+  const getStepById = async (id) => {
+    try {
+      const response = await axios.get(`https://api.spoonacular.com/recipes/${id}/analyzedInstructions`, {
+        params: {
+          apiKey: API_KEY,
+        }
+      })
+      console.log(response.data);
+      dispatch(selectedRecipe(response.data))
+    } catch(e) {
+      console.log("Error in getStepById", e);
+    }
+  }
+
   return{
-    getRecipeById
+    getRecipeById,
+    getStepById,
   }
 }
