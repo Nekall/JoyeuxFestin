@@ -1,7 +1,7 @@
 import axios from "axios";
 import {API_URL, API_KEY, MAX_RESULT} from "@env";
 import { useDispatch } from "react-redux";
-import { selectedRecipe } from "../../redux/actions";
+import { selectedRecipe, stepsRecipe } from "../../redux/actions";
 
 export const useFetchRecipeDetails = () => {
 
@@ -28,8 +28,8 @@ export const useFetchRecipeDetails = () => {
           apiKey: API_KEY,
         }
       })
-      console.log(response.data);
-      dispatch(selectedRecipe(response.data))
+      console.log("in fetch getStepById",response.data);
+      dispatch(stepsRecipe(response.data))
     } catch(e) {
       console.log("Error in getStepById", e);
     }

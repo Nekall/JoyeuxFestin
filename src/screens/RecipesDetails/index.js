@@ -17,11 +17,11 @@ export default function RecipesDetails({route, navigation}){
     getStepById(id);
   }, [])
 
-  console.log(steps);
+  console.log("in RecipesDetails",steps);
 
   return(
     <>
-      {recipe !== undefined?
+      {recipe !== undefined && steps !== undefined?
         <ScrollView>
           <Image source={{uri: recipe.image}} style={styles.image}/>
           <Text style={styles.title}>{recipe.title}</Text>
@@ -29,9 +29,17 @@ export default function RecipesDetails({route, navigation}){
           <View style={styles.ingredients}>
             <Text style={styles.ingTitle}>Ingredients:</Text>
             {recipe.extendedIngredients?.map(ingredient =>(
-              <Text style={styles.ingredient} key={recipe.id}>{ingredient.name}</Text>
+              <Text style={styles.ingredient} key={uuid.v4()}>{ingredient.name}</Text>
             ))}
           </View>
+          /*
+          <View style={styles.ingredients}>
+            <Text style={styles.ingTitle}>Steps:</Text>
+            {steps[0]?.steps.forEach(step =>(
+              <Text style={styles.step} key={uuid.v4()}>{step.step}</Text>
+            ))}
+          </View>
+          */
         </ScrollView>
         :
         <></>
