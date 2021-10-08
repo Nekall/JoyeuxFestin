@@ -1,21 +1,20 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import RecipesList from "../screens/RecipesList";
-import RecipesDetails from "../screens/RecipesDetails";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { RecipesStack } from "./RecipesStack";
 import WelcomeScreen from "../screens/WelcomeScreen";
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faHome, faUtensils } from '@fortawesome/free-solid-svg-icons'
+
+const Tabs = createBottomTabNavigator();
 
 export default function AppNavigation(){
-
-  const Stack = createNativeStackNavigator();
-
   return(
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="RecipesList">
-        <Stack.Screen name="RecipesList" component={RecipesList} />
-        <Stack.Screen name="RecipesDetails" component={RecipesDetails} />
-        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
-      </Stack.Navigator>
+      <Tabs.Navigator screenOptions={{ headerShown: false }}>
+        <Tabs.Screen name="Welcome" component={WelcomeScreen} options={{tabBarIcon: () => <FontAwesomeIcon icon={ faHome } />}}/>
+        <Tabs.Screen name="Recipes" component={RecipesStack} options={{tabBarIcon: () => <FontAwesomeIcon icon={ faUtensils } />}}/>
+      </Tabs.Navigator>
     </NavigationContainer>
   )
 }
