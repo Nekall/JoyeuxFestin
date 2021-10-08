@@ -10,18 +10,18 @@ export default function RecipesDetails({route, navigation}){
   const {getRecipeById, getStepById} = useFetchRecipeDetails();
 
   let recipe = useSelector(getSelectedRecipe);
-  let steps = useSelector(getStepsRecipe);
+  let recipeSteps = useSelector(getStepsRecipe);
 
   useEffect(() => {
     getRecipeById(id);
     getStepById(id);
   }, [])
 
-  console.log("in RecipesDetails",steps);
+  console.log("==>", recipeSteps[0]);
 
   return(
     <>
-      {recipe !== undefined && steps !== undefined?
+      {recipe !== undefined && recipeSteps !== undefined?
         <ScrollView>
           <Image source={{uri: recipe.image}} style={styles.image}/>
           <Text style={styles.title}>{recipe.title}</Text>
@@ -32,14 +32,12 @@ export default function RecipesDetails({route, navigation}){
               <Text style={styles.ingredient} key={uuid.v4()}>{ingredient.name}</Text>
             ))}
           </View>
-          /*
           <View style={styles.ingredients}>
             <Text style={styles.ingTitle}>Steps:</Text>
-            {steps[0]?.steps.forEach(step =>(
-              <Text style={styles.step} key={uuid.v4()}>{step.step}</Text>
+            {recipeSteps[0]?.steps.map(oneStep =>(
+              <Text style={styles.step} key={uuid.v4()}>{oneStep.step}</Text>
             ))}
           </View>
-          */
         </ScrollView>
         :
         <></>

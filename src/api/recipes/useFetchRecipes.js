@@ -7,12 +7,13 @@ export const useFetchRecipes = () => {
 
 const dispatch = useDispatch();
 
-  const getAllRecipes = async () => {
+  const getAllRecipes = async (page) => {
     try {
       const response = await axios.get(API_URL, {
         params: {
           apiKey: API_KEY,
-          number: MAX_RESULT
+          number: MAX_RESULT,
+          offset: page * MAX_RESULT,
         }
       })
       dispatch(addRecipes(response.data.results))
