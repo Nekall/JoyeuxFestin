@@ -7,8 +7,8 @@ const Stack = createNativeStackNavigator();
 
 export const RecipesStack = () => {
   return(
-    <Stack.Navigator>
-      <Stack.Screen name="RecipesList" component={RecipesList}/>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Recipes" component={RecipesList}/>
       <Stack.Screen name="RecipesDetails" component={RecipesDetails}/>
     </Stack.Navigator>
   )
