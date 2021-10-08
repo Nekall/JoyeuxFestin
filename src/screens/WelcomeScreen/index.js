@@ -1,9 +1,9 @@
 import React from "react";
-import {View, Card, FlatList, Text} from "react-native";
+import {View, Card, FlatList, Text, StyleSheet} from "react-native";
 
 export default function RecipesList(){
 
-  
+
 
   return(
     <>
